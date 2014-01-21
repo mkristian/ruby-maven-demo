@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email = [ 'mail@example.com' ]
   s.summary = 'gem depending on deps of other gems'
   s.description = 'gem depending on deps of other gems'
-  s.add_runtime_dependency 'simple', '=0'
+  s.add_runtime_dependency 'simple', '=1'
 end
 
 # vim: syntax=Ruby

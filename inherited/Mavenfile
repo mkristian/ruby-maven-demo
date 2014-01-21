@@ -1,5 +1,5 @@
 #-*- mode: ruby -*-
 
-gemspec :source => 'ext/java', :jar => 'jars/green', :include_jars => true
+gemspec :source => 'ext/java'
 
 # vim: syntax=Ruby

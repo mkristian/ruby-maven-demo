@@ -1,4 +1,4 @@
 require 'simple'
-require 'jars/green.jar'
+require 'inherited.jar'
 
 Java::SecondApp.new
