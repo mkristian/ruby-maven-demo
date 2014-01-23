@@ -2,4 +2,26 @@
 
 require 'maven/ruby/tasks'
 
+task :default => :setup
+
+task :setup do
+  basedir = File.dirname( File.expand_path( __FILE__ ) )
+  maven.exec 'dependency:list', '-DoutputFile=deps.lst', '-DincludeScope=runtime', '-DoutputAbsoluteArtifactFilename=true', '-DincludeTypes=jar', '-DoutputScope=false'
+  spec = eval( File.read( Dir[ '*.gemspec' ].first ) )
+  File.open( File.join( ENV[ 'RUBYLIBDIR' ], 
+                        "#{spec.name}_jars.rb" ), 'w' ) do |f|
+    f.puts "require 'jar-dependencies'"
+    f.puts
+    File.read( 'deps.lst' ).each_line do |line|
+      if line.match /:jar:/
+        line.gsub!( /:jar:|:compile:|:runtime:/, ':' )
+        line.sub!( /^\s+/, '' )
+        path = line.sub( /^.*:/, '' )
+        args = line.sub( /:[^:]+$/, '' ).gsub( /:/, "', '" )
+        f.puts( "require_jarfile( '#{path}', '#{args}' )" )
+      end
+    end
+  end
+end
+
 # vim: syntax=Ruby

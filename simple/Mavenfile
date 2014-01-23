@@ -1,15 +1,5 @@
 #-*- mode: ruby -*-
 
-gemspec :include_jars => true
-
-jruby_plugin!( :gem, 
-               :gemspec => 'simple.gemspec',
-               :dependencyMetafile => "#{model.artifactId}_jars.rb",
-               :includeDependencies => true )
-
-properties( 'jruby.plugins.version' => '1.0.0-SNAPSHOT',
-            'tesla.dump.pom' => 'pom.xml' )
-
-snapshot_repository 'https://oss.sonatype.org/content/repositories/snapshots', :id => 'oss'
+gemspec
 
 # vim: syntax=Ruby
